@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post Title — Flask Blog Lite</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <header class="container">
+    <h1><a href="index.html">Flask Blog Lite</a></h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="new_post.html">New Post</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <article class="card">
+      <h2>First Blog Post</h2>
+      <small class="muted">2025-09-19 12:00</small>
+      <p style="white-space:pre-wrap;">
+        This is the full body of the post. In Flask this would be loaded from the database.
+      </p>
+    </article>
+
+    <section>
+      <h3>Comments</h3>
+      <ul class="clean">
+        <li class="card">
+          <strong>Ana</strong>
+          <small class="muted" style="margin-left:8px;">2025-09-19 12:15</small>
+          <p>Great post! Looking forward to more.</p>
+        </li>
+        <li class="card">
+          <strong>Juan</strong>
+          <small class="muted" style="margin-left:8px;">2025-09-19 13:00</small>
+          <p>Very helpful explanation.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section style="margin-top:24px;">
+      <h3>Leave a comment</h3>
+      <form class="row" style="max-width:720px;">
+        <div>
+          <label for="author">Your name</label>
+          <input id="author" name="author" placeholder="e.g. Ana" required>
+        </div>
+        <div>
+          <label for="body">Comment</label>
+          <textarea id="body" name="body" rows="5" placeholder="Write something…" required></textarea>
+        </div>
+        <div>
+          <button class="btn btn-primary" type="submit">Post comment</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container footer">Made with Flask</footer>
+</body>
+</html>

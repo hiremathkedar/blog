@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home — Flask Blog Lite</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <header class="container">
+    <h1><a href="index.html">Flask Blog Lite</a></h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="new_post.html">New Post</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <h2>Recent Posts</h2>
+      <a class="btn btn-primary" href="new_post.html">New Post</a>
+    </div>
+
+    <div>
+      <article class="card">
+        <h3><a href="post_detail.html">First Blog Post</a></h3>
+        <small class="muted">2025-09-19 12:00</small>
+        <p>This is an example of a post body. In the dynamic version this would be truncated text from the database.</p>
+        <a class="btn" href="post_detail.html">Read more</a>
+      </article>
+
+      <article class="card">
+        <h3><a href="post_detail.html">Another Post</a></h3>
+        <small class="muted">2025-09-18 09:30</small>
+        <p>Second post body snippet goes here. Students can imagine this is a preview of a blog post.</p>
+        <a class="btn" href="post_detail.html">Read more</a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="container footer">Made with Flask</footer>
+</body>
+</html>
