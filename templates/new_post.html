@@ -1,21 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>New Post — Flask Blog Lite</title>
-  <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-  <header class="container">
-    <h1><a href="index.html">Flask Blog Lite</a></h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="new_post.html">New Post</a>
-    </nav>
-  </header>
-
-  <main class="container">
+{% extends "base.html" %}
+{% block title %} New Post {% endblock %}
+{% block content %}
     <h2>New Post</h2>
     <form class="row" style="max-width:720px;">
       <div>
@@ -30,8 +15,4 @@
         <button class="btn btn-primary" type="submit">Publish</button>
       </div>
     </form>
-  </main>
-
-  <footer class="container footer">Made with Flask</footer>
-</body>
-</html>
+{% endblock %}

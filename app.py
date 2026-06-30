@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
-
+    
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(100),nullable=False)
@@ -18,10 +18,26 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"<post {self.id} {self.title!r}>"
+    
+class Comment(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    author = db.Column(db.String(100),nullable=False)
+    body = db.Column(db.Text,nullable=False)
+    created_at=db.Column(db.DateTime,nullable=False,default=datetime.now(timezone.utc))
+    
+    post_id = db.Column(db.Integer,db.ForeignKey('post.id'),nullable=False)
+    post = db.relationship('Post',backref=db.backref('comments',cascade='all,delete-orphan',lazy='dynamic'))
+    
+    def __repr__(self):
+        return f"Comment {self.id} on Post {self.post_id!r}"
 
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/post/new",methods=["GET","POST"])
+def new_post():
+    return render_template("new_post.html")
 
 
 
