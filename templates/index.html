@@ -2,18 +2,17 @@
 {% block title %} Home - Flask Blog Lite {% endblock%}
 {% block content %}
     <div>
+
+      {% if posts %}
+      {% for post in posts %}
       <article class="card">
-        <h3><a href="post_detail.html">First Blog Post</a></h3>
-        <small class="muted">2025-09-19 12:00</small>
-        <p>This is an example of a post body. In the dynamic version this would be truncated text from the database.</p>
-        <a class="btn" href="post_detail.html">Read more</a>
+        <h3><a href="{{url_for('post_detail',post_id=post.id)}}">{{post.title}}</a></h3>
+        <small class="muted">{{post.created_at.strftime('%Y-%m-%d %H:%M')}}</small>
+        <p>{{post.body[:200]}} {% if post.body | length > 200 %}..{% endif %}</p>
+        <a class="btn" href="{{url_for('post_detail',post_id=post.id)}}">Read more</a>
       </article>
 
-      <article class="card">
-        <h3><a href="post_detail.html">Another Post</a></h3>
-        <small class="muted">2025-09-18 09:30</small>
-        <p>Second post body snippet goes here. Students can imagine this is a preview of a blog post.</p>
-        <a class="btn" href="post_detail.html">Read more</a>
-      </article>
+      {% endfor %}
+      {% endif %}
     </div>
 {% endblock %}

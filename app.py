@@ -16,7 +16,7 @@ migrate = Migrate(app,db)
     
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(100),nullable=False)
+    title = db.Column(db.String(200),nullable=False)
     body = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,default=datetime.now(timezone.utc))
 
@@ -37,7 +37,18 @@ class Comment(db.Model):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    posts = Post.query.order_by(Post.created_at.desc()).all()
+    return render_template("index.html",posts=posts)
+
+
+@app.route('/post/<int:post_id>')
+def post_detail(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template("post_detail.html",post=post)
+
+
+
+
 
 @app.route("/post/new",methods=["GET","POST"])
 def new_post():
