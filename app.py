@@ -44,7 +44,29 @@ def home():
 @app.route('/post/<int:post_id>')
 def post_detail(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template("post_detail.html",post=post)
+    comments = post.comments.order_by(Comment.created_at.desc()).all()
+    return render_template("post_detail.html",post=post,comments=comments)
+
+@app.route("/post/<int:post_id>/comment", methods=["POST"])
+def create_comment(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    author = request.form.get("author","").strip()
+    body = request.form.get("body","").strip()
+
+    if not author or not body:
+        flash("Name and comment are required")
+        return redirect(url_for("post_detail",post_id=post.id))
+    
+    comment = Comment(author=author, body = body , post=post)
+    db.session.add(comment)
+    db.session.commit()
+    flash("Comment added")
+
+    return redirect(url_for("post_detail",post_id=post.id))
+
+
+    
 
 
 

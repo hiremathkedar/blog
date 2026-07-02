@@ -16,6 +16,22 @@
   </header>
 
   <main class="container">
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div>
+        {% for message in messages %}
+        <div class="card">
+            {{message}}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
+
+
+
+
     <!-- Page-specific content goes here -->
      {% block content %} {% endblock %}
   </main>

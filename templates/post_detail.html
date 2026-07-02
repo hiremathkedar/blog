@@ -1,21 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Post Title — Flask Blog Lite</title>
-  <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-  <header class="container">
-    <h1><a href="{{url_for('home')}}">Flask Blog Lite</a></h1>
-    <nav>
-      <a href="{{url_for('home')}}">Home</a>
-      <a href="{{url_for('new_post')}}">New Post</a>
-    </nav>
-  </header>
+{% extends 'base.html' %}
+{% block title %} Home - Flask blog lite {% endblock %}
+{% block content %}
 
-  <main class="container">
     <article class="card">
       <h2>{{post.title}}</h2>
       <small class="muted">{{ post.created_at.strftime('%Y-%m-%d %H:%M')}}</small>
@@ -24,23 +10,22 @@
 
     <section>
       <h3>Comments</h3>
+      {% if comments and comments|length > 0 %}
       <ul class="clean">
+        {% for comment in comments %}
         <li class="card">
-          <strong>Ana</strong>
-          <small class="muted" style="margin-left:8px;">2025-09-19 12:15</small>
-          <p>Great post! Looking forward to more.</p>
+          <strong>{{comment.autor}}</strong>
+          <small class="muted" style="margin-left:8px;">{{post.created_at.strftime('%Y-%m-%d %H:%M')}}</small>
+          <p>{{comment.body}}</p>
         </li>
-        <li class="card">
-          <strong>Juan</strong>
-          <small class="muted" style="margin-left:8px;">2025-09-19 13:00</small>
-          <p>Very helpful explanation.</p>
-        </li>
+        {% endfor %}
       </ul>
+      {% endif %}
     </section>
 
     <section style="margin-top:24px;">
       <h3>Leave a comment</h3>
-      <form class="row" style="max-width:720px;">
+      <form method="post" action="{{url_for('create_comment',post_id=post.id)}}" class="row" style="max-width:720px;">
         <div>
           <label for="author">Your name</label>
           <input id="author" name="author" placeholder="e.g. Ana" required>
@@ -54,8 +39,5 @@
         </div>
       </form>
     </section>
-  </main>
 
-  <footer class="container footer">Made with Flask</footer>
-</body>
-</html>
+{% endblock %}
